@@ -1,0 +1,18 @@
+{% extends 'master.html'%}
+	{% block contenido%}
+
+	<div class='container-fluid'>
+		<div class="row">
+			<div class="col-xs-6 col-md-4">
+			</div>
+			<div class="col-xs-6 col-md-4">
+				<div class="alert alert-success"><a href="#modificar" name="modificar">{{t}}</a></div>
+				<form method="POST" >{% csrf_token %}
+					{{form.as_p}}
+					<input type="submit" value={{t}} class="btn btn-success btn-lg active"> </input>
+				</form></br>
+			</div>
+		</div>
+	</div>
+
+	{% endblock contenido%}

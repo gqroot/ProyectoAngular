@@ -1,0 +1,26 @@
+.well {
+    background-color: #e5e5e4;
+}
+
+.alert-success {
+	color: #333333;
+    background-color: rgb(229, 229, 228);
+}
+
+td{
+	color: #1F618D;
+	font-weight: 600;
+}
+label{
+	color:white;
+}
+
+.form-control {
+    color: white;
+    background-color: #1F618D;
+}
+.form-control[disabled], 
+.form-control[readonly], fieldset[disabled] 
+.form-control {
+    background-color: gray; 
+    }
