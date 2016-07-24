@@ -1,10 +1,14 @@
-from django.shortcuts import render, redirect
-from .models import Materia
-from .models import Alumno
-from .forms import FormMateria
-from .forms import FormAlumno
+from django.shortcuts import render, render_to_response, redirect
+from .models import Materia, Alumno
+from .forms import FormMateria, FormAlumno, FormLogin, EditarContrasenaForm
 from django.contrib import messages
 
+from django.contrib.auth.decorators import login_required
+from django.template import RequestContext
+from django.contrib.auth import login, authenticate, logout
+from django.http import HttpResponse,HttpResponseRedirect
+
+@login_required(login_url='/administrar/ingresar/')
 def administrar(request):
 	return render(request,'administrar.html',{})
 
@@ -161,3 +165,63 @@ def eliminarMateria(request):
 	else:
 		messages.add_message(request, messages.ERROR, "No se ha eliminado la materia", fail_silently=True)
 	return redirect(materias)
+
+def ingresar(request):
+    
+    obF = FormLogin(request.POST or None)
+    context={
+    	'form':obF,
+    	'ms':'Por favor digíte su nombre de usuario y contraseña para ingresar',
+    }
+
+    next = ""
+    if request.GET:  
+        next = request.GET['next']
+    if request.method == 'POST':
+        if obF.is_valid:
+            usuario = request.POST['username']
+            clave = request.POST['password']
+            acceso = authenticate(username=usuario, password=clave)
+            if acceso is not None:
+                if acceso.is_active:
+                    login(request, acceso)
+                    if next == "":
+                        return redirect(administrar)
+                    else:
+                        return redirect(next)
+                else:
+                	messages.add_message(request, messages.ERROR, 'Usuario inactivo', fail_silently=True)
+                	return render(request,'login.html',context)
+            else:
+            	messages.add_message(request, messages.ERROR, 'El nombre de usuario o la contraseña que ingresaste son incorrectos', fail_silently=True)
+            	return render(request,'login.html',context)
+    return render(request,'login.html', context)
+
+@login_required(login_url='/administrar/ingresar/')
+def perfil(request):
+    perfil = request.user
+    form = EditarContrasenaForm
+    if request.method == 'POST':
+        form = EditarContrasenaForm(request.POST)
+        if form.is_valid():
+            request.user.password = make_password(form.cleaned_data['password'])
+            request.user.save()
+            messages.add_message(request, messages.SUCCESS, "La contraseña ha sido cambiado con exito!.", fail_silently=True)
+            messages.add_message(request, messages.SUCCESS, "Es necesario introducir los datos para entrar.", fail_silently=True)
+            return render_to_response('index.html', RequestContext(request, locals()))
+        else:
+            messages.add_message(request, messages.WARNING, "Datos incorrectos.", fail_silently=True)
+    else:
+        form = EditarContrasenaForm()
+
+    context={
+    	'perfil':perfil,
+    	'form':form,
+    }
+        
+    return render(request, 'perfil.html', context)
+
+@login_required(login_url='')
+def cerrar(request):
+    logout(request)
+    return HttpResponseRedirect('/administrar')    

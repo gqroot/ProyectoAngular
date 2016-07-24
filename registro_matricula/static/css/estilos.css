@@ -1,5 +1,18 @@
 .well {
-    background-color: #e5e5e4;
+    background-color: #0f1a1c;
+    border: 1px solid #337ab7;
+}
+
+body {
+    color: white;
+}
+
+.panel-default {
+    border-color: #337ab7;
+}
+
+.panel {
+    background-color: #0f1a1c;
 }
 
 .alert-success {
@@ -7,8 +20,17 @@
     background-color: rgb(229, 229, 228);
 }
 
+h3 strong a:link, h3 strong a:visited{
+    color: white;
+}
+
+a:link, a:visited {
+    color: #447e9b;
+    text-decoration: none;
+}
+
 td{
-	color: #1F618D;
+	color: #e5e5e4;
 	font-weight: 600;
 }
 label{
@@ -16,11 +38,20 @@ label{
 }
 
 .form-control {
-    color: white;
-    background-color: #1F618D;
+    color: #1F618D;
+    background-color: #e5e5e4;
+    font-weight: 600;
 }
 .form-control[disabled], 
 .form-control[readonly], fieldset[disabled] 
 .form-control {
     background-color: gray; 
     }
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    border-top: 1px solid #e5e5e4;
+}
+
+.table>tbody>tr.info>td, .table>tbody>tr.info>th, .table>tbody>tr>td.info, .table>tbody>tr>th.info, .table>tfoot>tr.info>td, .table>tfoot>tr.info>th, .table>tfoot>tr>td.info, .table>tfoot>tr>th.info, .table>thead>tr.info>td, .table>thead>tr.info>th, .table>thead>tr>td.info, .table>thead>tr>th.info {
+    background-color: #0f1a1c;
+}

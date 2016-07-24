@@ -9,5 +9,8 @@ urlpatterns=[
 	url(r'^modificarMateria','gestion.views.modificarMateria'),
 	url(r'^eliminarMateria','gestion.views.eliminarMateria'),
 	url(r'^crearAlumno','gestion.views.crearAlumno'),
-	url(r'^crearMateria','gestion.views.crearMateria'),
+	url(r'^crearMateria','gestion.views.crearMateria'),	
+    url(r'^perfil/$', 'gestion.views.perfil', name='perfil'),
+    url(r'^ingresar/$', 'gestion.views.ingresar', name='ingresar'),
+    url(r'^cerrar/$', 'gestion.views.cerrar', name='cerrar'),
 ]
