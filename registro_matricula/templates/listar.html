@@ -1,0 +1,47 @@
+{% extends 'master.html'%}
+	{% block contenido%}
+
+	<div class='container-fluid'>
+		<div class="row">
+			<div class="col-xs-6 col-md-4">
+			</div>
+			<div class="col-xs-6 col-md-4">
+				<div class="alert alert-success"><a href="#lista" name="lista">{{t | upper}}</a></div>
+			</div>		
+			<div class="col-xs-6 col-md-4">
+				<a href="crear" class="btn btn-success btn-lg active"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+			</div>	
+			<table class="table table-hover">
+				<tr  class="info">
+					<td>CEDULA</td>
+					<td>NOMBRES</td>
+					<td>APELLIDOS</td>
+					<td>CORREO</td>
+					<td>TELEFONO</td>
+					<td>CELULAR</td>
+					<td>DIRECCION</td>
+					<td>GENERO</td>
+					<td>ESTADO CIVIL</td>
+					<td>FECHA NACIMIENTO</td>
+					<td></td>
+				</tr>
+			{% for d in clientes%}
+				<tr>
+					<td><a href="modificar?ced={{d.cedula}}" >{{d.cedula}}</a></td>
+					<td>{{d.nombres}}</td>
+					<td>{{d.apellidos}}</td>
+					<td>{{d.correo}}</td>
+					<td>{{d.telefono}}</td>
+					<td>{{d.celular}}</td>
+					<td>{{d.direccion}}</td>
+					<td>{{d.sexo}}</td>
+					<td>{{d.estadoCivil}}</td>
+					<td>{{d.fechaNacimiento}}</td>
+					<td><a href="imprimir?ced={{d.cedula}}"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a> | <a href="eliminar?ced={{d.cedula}}" onclick="if(!confirm('¿Est seguro de eliminar el cliente?'))return false"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a> | <a href="cuentas?ced={{d.cedula}}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a></td>
+				</tr>
+			{% endfor%}
+
+			</table>	
+		</div>
+	</div>
+	{% endblock contenido%}

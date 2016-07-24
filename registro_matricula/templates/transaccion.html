@@ -6,7 +6,7 @@
 			<div class="col-xs-6 col-md-4">
 			</div>
 			<div class="col-xs-6 col-md-4">
-				<div class="alert alert-success"><a href="#form" name="form">{{t | upper}}</a></div>
+				<div class="alert alert-success"><a href="#transaccion" name="transaccion">{{t}}</a></div>
 				<form method="POST" >{% csrf_token %}
 
 					{% for campo in form %}
@@ -14,7 +14,8 @@
 					{% endfor %}
 
 					{{form1.as_p}}
-					<input type="submit" value={{t}} class="btn btn-success btn-lg active" onclick="if(!confirm('Confirme su peticion'))return false"> </input>
+					<input type="submit" value="Registrar" class="btn btn-success btn-lg active" onclick="if(!confirm('¿Est seguro de realizar la transaccion?'))return false"> </input>
+
 				</form></br>
 			</div>
 		</div>
