@@ -1,0 +1,88 @@
+{% extends 'master.html'%}
+	{% block contenido%}
+
+
+<div class="page-header">
+	<h1>Usuario: {{perfil.username}}</h1>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-body">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<tbody>
+					<tr>
+						<th>Apellidos</th>
+						<td>{{perfil.last_name}}</td>
+					</tr>
+					<tr>
+						<th>Nombres</th>
+						<td>{{perfil.first_name}}</td>
+					</tr>
+					<tr>
+						<th>Titulo</th>
+						<td>{{perfil.titulo}}</td>
+					</tr>
+					<tr>
+						<th>Abreviatura</th>
+						<td>{{perfil.abreviatura}}</td>
+					</tr>
+					<tr>
+						<th>Clasificación</th>
+						<td>{{perfil.clasificacion}}</td>
+					</tr>
+					<tr>
+						<th>Dedicación</th>
+						<td>{{perfil.dedicacion}}</td>
+					</tr>
+					{% if perfil.coordinaciones.all  %}
+					<tr>
+						<th>Coordinaciones</th>
+						<td>
+							{% for coordinacion in perfil.coordinaciones.all %}
+							{{coordinacion}} <br>
+							{% endfor %}
+						</td>
+					</tr>
+					{% endif %}
+					{% if perfil.docencias.all %}
+					<tr>
+						<th>Docencia en</th>
+						<td>
+							{% for docencia in perfil.docencias.all %}
+							{{docencia}} <br>
+							{% endfor %}
+						</td>
+					</tr>
+					{% endif %}
+				</tbody>
+			</table>
+
+
+			<a class="btn btn-primary" data-toggle="modal" href='#modal-id'>Modificar contraseña</a>
+			<div class="modal fade" id="modal-id">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Modificar Contraseña</h4>
+						</div>
+						<div class="modal-body">
+							<form method="post" action="">
+								{% csrf_token %}
+								{{ form.as_p }}
+								<button class="btn btn-primary" type="submit">Actualizar contraseña</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+{% endblock contenido %}
